@@ -1,0 +1,19 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+app/build
+.kotlin
+
+# 签名密钥与凭据（禁止提交）
+muse-release.keystore
+*.keystore
+*.jks
+keystore.properties
+signing.properties
+*.pem

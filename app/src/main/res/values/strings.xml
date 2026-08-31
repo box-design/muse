@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MUSE</string>
+    <string name="permission_title">私人数字博物馆</string>
+    <string name="permission_body">MUSE 需要读取你相册中的照片，用以自动策划属于你的展览。所有内容仅保存在这台设备上，不会被上传。</string>
+    <string name="permission_action">GRANT ACCESS</string>
+    <string name="permission_denied_hint">访问被拒绝。请在系统设置中允许 MUSE 读取照片后返回。</string>
+    <string name="permission_open_settings">OPEN SETTINGS</string>
+    <string name="tab_explore">展览</string>
+    <string name="tab_create">创作</string>
+    <string name="tab_collection">收藏</string>
+</resources>
