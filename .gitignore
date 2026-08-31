@@ -9,6 +9,7 @@
 .cxx
 app/build
 .kotlin
+.uploads
 
 # 签名密钥与凭据（禁止提交）
 muse-release.keystore
