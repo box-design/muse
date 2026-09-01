@@ -1,56 +1,73 @@
-# Muse · 私人数字博物馆
+# Muse
 
-一款本地优先的 Android 数字博物馆 App，方便你以「展览 · 收藏 · 创作」的方式整理和回味手机相册里的点点滴滴。
+Muse 是一款 Android 照片整理应用，将手机相册中的照片以博物馆展览的形式组织和呈现，所有数据保存在本地，无需联网和账号。
 
-## ✨ 功能
+当前版本：v1.0.0
 
-- **博览（Explore）**：按时间线整理照片成日折卡，宽屏双栏展示，展览封面可左右图文排版。
-- **收藏（Collection）**：收藏喜爱的作品并分组展示，影集封面架、明信片等。
-- **创作（Create）**：
-  - **明信片**：选取照片，自定义纸质与文字，渲染为 1080×1440 PNG 保存至系统相册。
-  - **取色器（Palette）**：提取照片主色调，生成配色。
-  - **影集（Zine）**：多选 8–20 张照片装订成册，支持拖拽排序、封面滤镜与翻页阅读器。
-- **横屏适配**：基于 `WindowSizeClass` 的自适应布局，平板与横屏体验更佳。
+## 功能
 
-## 🛠 技术栈
+- **博览** — 按日期自动整理照片，以时间线方式浏览
+- **展览** — 将照片组织为展览，提供封面与画廊式浏览
+- **收藏** — 收藏喜爱的照片、明信片和影集
+- **明信片** — 用照片制作明信片，支持选择纸质效果、编辑文字，导出为 PNG 保存到相册
+- **影集** — 选取 8–20 张照片装订成册，支持拖拽排序、封面样式和翻页阅读
+- **取色器** — 从照片中提取主色调，生成配色方案
+- **横屏 / 平板适配** — 基于 WindowSizeClass 的自适应布局
 
-- Kotlin · Jetpack Compose（Material 3）
-- MVVM（`ViewModel` + Repository）
-- 本地持久化：JSON（`MuseStore`）
-- MediaStore 导出、自适应布局、动画为主
+## 技术栈
 
-## 🚀 构建
+- Kotlin
+- Jetpack Compose（Material 3）
+- MVVM 架构（ViewModel + Repository）
+- 本地 JSON 持久化
 
-环境要求：JDK 17+，Android SDK 35。
+## 环境要求
+
+- Android Studio Ladybug 或更高版本
+- JDK 17+
+- Android SDK 35（minSdk 26 / targetSdk 35）
+
+## 构建
 
 ```bash
-# 生成签名密钥（首次）
-keytool -genkeypair -alias muse -keyalg RSA -keysize 2048 \
-  -keystore muse-release.keystore -storetype PKCS12
+git clone https://github.com/box-design/muse.git
+cd muse
+./gradlew assembleDebug
+```
 
-# 配置签名凭据（请将以下口令改为你自己的，勿提交到仓库）
-cat > keystore.properties <<EOF
+### Release 签名
+
+仓库不包含签名文件。如需构建 release 包，在项目根目录创建 `muse-release.keystore` 和 `keystore.properties`：
+
+```properties
 storeFile=muse-release.keystore
 storePassword=你的口令
 keyAlias=muse
 keyPassword=你的口令
-EOF
-
-# 组装 release 包
-./gradlew assembleRelease
 ```
 
-> 说明：`muse-release.keystore` 与 `keystore.properties` 属于签名凭据，已被 `.gitignore` 忽略，**严禁提交到仓库**。
+这两个文件已被 `.gitignore` 忽略，请勿提交到仓库。
 
-## 📦 安装包
+## 下载
 
-- 最新 release 安装包见 [`releases/Muse-v1.0.0-release.apk`](releases/Muse-v1.0.0-release.apk)。
+- v1.0.0 安装包：[releases/Muse-v1.0.0-release.apk](releases/Muse-v1.0.0-release.apk)
 
-## 🔒 安全
+## 目录结构
 
-- 仓库历史已压缩为单个干净提交，签名密钥与口令已从版本库中移除并纳入 `.gitignore`。
-- 建议妥善备份 `muse-release.keystore` 与 `keystore.properties`，一旦丢失将无法更新已发布的应用。
+```
+app/src/main/java/com/muse/app/
+├── data/          # 数据层：模型、仓库、持久化
+├── di/            # 依赖注入容器
+├── ui/            # 界面：按功能模块分包
+│   ├── adaptive/  #   窗口尺寸适配
+│   ├── collection/#   收藏页
+│   ├── create/    #   创作页（明信片、影集、取色器）
+│   ├── explore/   #   博览与展览页
+│   ├── viewer/    #   照片查看器
+│   └── zine/      #   影集编辑与阅读
+└── util/          # 工具类
+```
 
-## 📄 License
+## License
 
-项目所有权归作者所有。当前未提供开源许可证，如需使用请联系作者。
+版权所有，保留所有权利。
